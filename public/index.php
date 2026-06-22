@@ -17,6 +17,7 @@ require_once __DIR__ . '/../app/core/Controller.php';
 require_once __DIR__ . '/../app/controllers/DashboardController.php';
 require_once __DIR__ . '/../app/controllers/SystemController.php';
 require_once __DIR__ . '/../app/controllers/DepartmentController.php';
+require_once __DIR__ . '/../app/controllers/UserController.php';
 
 require_once __DIR__ . '/../app/helpers/functions.php';
 
@@ -70,6 +71,10 @@ $router->post('/departments/store', function () {
     $controller->store();
 });
 
+$router->get('/users/create', function () {
+    $controller = new UserController();
+    $controller->create();
+});
 
 
 $router->dispatch();

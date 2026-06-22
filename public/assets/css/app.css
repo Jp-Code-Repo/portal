@@ -113,3 +113,8 @@ body {
 .system-card .btn {
     margin-top: auto;
 }
+
+.card-header {
+    padding: 0.65rem 1rem;
+    background-color: #eef2ff !important;
+}
