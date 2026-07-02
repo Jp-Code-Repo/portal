@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+namespace App\Controllers;
+
+use App\Core\Controller;
+use App\Models\DepartmentModel;
+use App\Models\RoleModel;
+
 class UserController extends Controller
 {
     public function index(): void
@@ -22,9 +28,9 @@ class UserController extends Controller
         $roles = $roleModel->getActiveRoles();
 
         $this->view('users/create', [
-            'pageTitle' => 'Create User',
+            'pageTitle'   => 'Create User',
             'departments' => $departments,
-            'roles' => $roles,
+            'roles'       => $roles,
         ]);
     }
 }
