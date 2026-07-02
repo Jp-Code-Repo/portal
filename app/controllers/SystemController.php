@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+namespace App\Controllers;
+
+use App\Core\Controller;
+use App\Models\DepartmentModel;
+use App\Models\SystemModel;
+
 class SystemController extends Controller
 {
     public function index(): void

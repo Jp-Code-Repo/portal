@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+namespace App\Core\Validation\Rules;
+
+use App\Core\Validation\RuleInterface;
+
 class RequiredRule implements RuleInterface
 {
     public function validate(

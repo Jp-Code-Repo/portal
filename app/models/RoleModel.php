@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
+namespace App\Models;
+
+use App\Core\Database;
+use PDO;
+
 class RoleModel
 {
     private PDO $db;
@@ -16,8 +21,8 @@ class RoleModel
         $sql = "
             SELECT
                 id,
-                name,
                 code,
+                name,
                 user_type,
                 status
             FROM roles
@@ -34,8 +39,8 @@ class RoleModel
         $sql = "
             SELECT
                 id,
-                name,
                 code,
+                name,
                 user_type
             FROM roles
             WHERE status = 1

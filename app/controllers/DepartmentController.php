@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
+namespace App\Controllers;
+
+use App\Core\Controller;
+use App\Models\DepartmentModel;
+
 class DepartmentController extends Controller
 {
     public function index(): void
@@ -36,8 +41,6 @@ class DepartmentController extends Controller
                 'status' => $status,
             ];
 
-            
-
             toast_error('Department name is required');
 
             redirect('/departments/create');
@@ -59,11 +62,9 @@ class DepartmentController extends Controller
         } else {
 
             toast_error('Failed to add department.');
-            
+
         }
 
         redirect('/departments');
-
     }
-
 }

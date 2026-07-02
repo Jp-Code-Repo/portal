@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
+namespace App\Models;
+
+use App\Core\Database;
+use PDO;
+
 class DepartmentModel
 {
     private PDO $db;
@@ -26,7 +31,7 @@ class DepartmentModel
 
         return $stmt->fetchAll();
     }
-    
+
     public function getActiveDepartments(): array
     {
         $sql = "
@@ -59,7 +64,7 @@ class DepartmentModel
         $stmt = $this->db->prepare($sql);
 
         return $stmt->execute([
-            'name' => $data['name'],
+            'name'   => $data['name'],
             'status' => $data['status'],
         ]);
     }
