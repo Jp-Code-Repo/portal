@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 class UserController extends Controller
 {
+    public function index(): void
+    {
+        $this->view('users/index', [
+            'pageTitle' => 'Users',
+        ]);
+    }
+
     public function create(): void
     {
         $departmentModel = new DepartmentModel();

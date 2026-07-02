@@ -7,6 +7,7 @@
 
     $isSystems = str_contains($currentUri, '/systems');
     $isDepartments = str_contains($currentUri, '/departments');
+    $isUsers = str_contains($currentUri, '/users');
 ?>
 
 <div class="sidebar p-3">
@@ -40,7 +41,7 @@
         </li>
 
         <li class="nav-item mb-2">
-            <a href="#" class="nav-link">
+            <a href="/users" class="nav-link <?= $isUsers ? 'active' : '' ?>">
                 <i class="bi bi-people-fill pe-1"></i>
                 Users
             </a>

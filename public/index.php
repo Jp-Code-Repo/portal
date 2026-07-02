@@ -12,6 +12,8 @@ require_once __DIR__ . '/../app/core/Router.php';
 
 require_once __DIR__ . '/../app/models/DepartmentModel.php';
 require_once __DIR__ . '/../app/models/SystemModel.php';
+require_once __DIR__ . '/../app/models/UserModel.php';
+require_once __DIR__ . '/../app/models/RoleModel.php';
 
 require_once __DIR__ . '/../app/core/Controller.php';
 require_once __DIR__ . '/../app/controllers/DashboardController.php';
@@ -69,6 +71,11 @@ $router->get('/departments/create', function () {
 $router->post('/departments/store', function () {
     $controller = new DepartmentController();
     $controller->store();
+});
+
+$router->get('/users', function () {
+    $controller = new UserController();
+    $controller->index();
 });
 
 $router->get('/users/create', function () {

@@ -63,6 +63,7 @@
 
                     <select
                         name="user_type"
+                        id="user_type"
                         class="form-select"
                     >
 
@@ -304,40 +305,26 @@
 
                     <select
                         name="role"
+                        id="role"
                         class="form-select"
+                        disabled
                     >
 
-                        <option selected disabled>
-                            Select Role
+                        <option value="">
+                            Select User Type First
                         </option>
 
-                        <option
-                            value="admin"
-                            <?= old('role') === 'admin' ? 'selected' : '' ?>
-                        >
-                            Administrator
-                        </option>
+                        <?php foreach ($roles as $role): ?>
 
-                        <option
-                            value="department_head"
-                            <?= old('role') === 'department_head' ? 'selected' : '' ?>
-                        >
-                            Department Head
-                        </option>
+                            <option
+                                value="<?= htmlspecialchars($role['code']) ?>"
+                                data-user-type="<?= htmlspecialchars($role['user_type']) ?>"
+                                <?= old('role') === $role['code'] ? 'selected' : '' ?>
+                            >
+                                <?= htmlspecialchars($role['name']) ?>
+                            </option>
 
-                        <option
-                            value="staff"
-                            <?= old('role') === 'staff' ? 'selected' : '' ?>
-                        >
-                            Staff
-                        </option>
-
-                        <option
-                            value="student"
-                            <?= old('role') === 'student' ? 'selected' : '' ?>
-                        >
-                            Student
-                        </option>
+                        <?php endforeach; ?>
 
                     </select>
 
@@ -395,5 +382,7 @@
         </button>
 
     </div>
+
+    <script src="/assets/js/users/create.js"></script>
 
 </form>
