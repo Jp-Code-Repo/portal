@@ -112,12 +112,10 @@ class UserController extends Controller
         $temporaryPassword = '';
 
         for ($i = 0; $i < 10; $i++) {
-
             $temporaryPassword .= $characters[random_int(
                 0,
                 strlen($characters) - 1
             )];
-
         }
 
         $hashedPassword = password_hash(
@@ -125,8 +123,38 @@ class UserController extends Controller
             PASSWORD_DEFAULT
         );
 
-        $userModel->create([
-            
+        $result = $userModel->create([
+            'dept_id'        => (int) $_POST['dept_id'],
+            'user_type'      => $_POST['user_type'],
+            'inst_no'        => trim($_POST['inst_no']),
+            'id_no'          => trim($_POST['id_no']),
+            'first_name'     => trim($_POST['first_name']),
+            'middle_name'    => trim($_POST['middle_name']),
+            'last_name'      => trim($_POST['last_name']),
+            'extension_name' => trim($_POST['extension_name']),
+            'username'       => trim($_POST['username']),
+            'email'          => trim($_POST['email']),
+            'password'       => $hashedPassword,
+            'role'           => $_POST['role'],
+            'status'         => (int) $_POST['status'],
         ]);
+
+        if (! $result) {
+
+            $_SESSION['old'] = $_POST;
+
+            toast_error('Unable to create user.');
+
+            redirect('/users/create');
+        }
+
+        unset($_SESSION['old']);
+
+        flash('temporary_password', [
+            'username' => $_POST['username'],
+            'password' => $temporaryPassword,
+        ]);
+
+        redirect('/users');
     }
 }
