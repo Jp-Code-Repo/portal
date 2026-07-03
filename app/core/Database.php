@@ -15,17 +15,20 @@ class Database
     {
         if (self::$connection === null) {
 
-            $host = DB_HOST;
-            $dbname = DB_NAME;
-            $username = DB_USER;
-            $password = DB_PASS;
+            $config = require __DIR__ . '/../config/database.php';
 
             try {
 
                 self::$connection = new PDO(
-                    "mysql:host={$host};dbname={$dbname};charset=utf8mb4",
-                    $username,
-                    $password
+                    sprintf(
+                        'mysql:host=%s;port=%s;dbname=%s;charset=%s',
+                        $config['host'],
+                        $config['port'],
+                        $config['database'],
+                        $config['charset']
+                    ),
+                    $config['username'],
+                    $config['password']
                 );
 
                 self::$connection->setAttribute(

@@ -18,14 +18,23 @@ class Autoloader
 
             $relativeClass = substr($class, strlen($prefix));
 
+            /*
+             * Convert the first namespace segment
+             * to match our lowercase directory structure.
+             */
+            $segments = explode('\\', $relativeClass);
+
+            if (!empty($segments)) {
+                $segments[0] = strtolower($segments[0]);
+            }
+
             $file = dirname(__DIR__) . DIRECTORY_SEPARATOR
-                . str_replace('\\', DIRECTORY_SEPARATOR, $relativeClass)
+                . implode(DIRECTORY_SEPARATOR, $segments)
                 . '.php';
 
             if (file_exists($file)) {
                 require_once $file;
             }
-
         });
     }
 }

@@ -46,6 +46,40 @@ class UserModel
         return $stmt->fetchAll();
     }
 
+    public function usernameExists(string $username): bool
+    {
+        $sql = "
+            SELECT COUNT(*)
+            FROM users
+            WHERE username = :username
+        ";
+
+        $stmt = $this->db->prepare($sql);
+
+        $stmt->execute([
+            'username' => $username,
+        ]);
+
+        return (int) $stmt->fetchColumn() > 0;
+    }
+
+    public function emailExists(string $email): bool
+    {
+        $sql = "
+            SELECT COUNT(*)
+            FROM users
+            WHERE email = :email
+        ";
+
+        $stmt = $this->db->prepare($sql);
+
+        $stmt->execute([
+            'email' => $email,
+        ]);
+
+        return (int) $stmt->fetchColumn() > 0;
+    }
+
     public function create(array $data): bool
     {
         $sql = "

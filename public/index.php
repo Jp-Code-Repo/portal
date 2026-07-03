@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 error_reporting(E_ALL);
@@ -6,23 +7,18 @@ ini_set('display_errors', '1');
 
 session_start();
 
-require_once __DIR__ . '/../app/core/Database.php';
-
-require_once __DIR__ . '/../app/core/Router.php';
-
-require_once __DIR__ . '/../app/models/DepartmentModel.php';
-require_once __DIR__ . '/../app/models/SystemModel.php';
-require_once __DIR__ . '/../app/models/UserModel.php';
-require_once __DIR__ . '/../app/models/RoleModel.php';
-
-require_once __DIR__ . '/../app/core/Controller.php';
-require_once __DIR__ . '/../app/controllers/DashboardController.php';
-require_once __DIR__ . '/../app/controllers/SystemController.php';
-require_once __DIR__ . '/../app/controllers/DepartmentController.php';
-require_once __DIR__ . '/../app/controllers/UserController.php';
-
+require_once __DIR__ . '/../app/core/Autoloader.php';
 require_once __DIR__ . '/../app/helpers/functions.php';
 
+use App\Core\Autoloader;
+use App\Core\Router;
+
+use App\Controllers\DashboardController;
+use App\Controllers\DepartmentController;
+use App\Controllers\SystemController;
+use App\Controllers\UserController;
+
+Autoloader::register();
 
 $router = new Router();
 
@@ -34,12 +30,6 @@ $router->get('/', function () {
 $router->get('/login', function () {
     echo 'Login Page';
 });
-
-$router->get('/users', function () {
-    echo 'Users Page';
-});
-
-
 
 $router->get('/systems', function () {
     $controller = new SystemController();
@@ -55,8 +45,6 @@ $router->post('/systems/store', function () {
     $controller = new SystemController();
     $controller->store();
 });
-
-
 
 $router->get('/departments', function () {
     $controller = new DepartmentController();
@@ -83,5 +71,9 @@ $router->get('/users/create', function () {
     $controller->create();
 });
 
+$router->post('/users/store', function () {
+    $controller = new UserController();
+    $controller->store();
+});
 
 $router->dispatch();
